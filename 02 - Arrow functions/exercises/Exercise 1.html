@@ -35,32 +35,46 @@
   const nodeList = document.querySelectorAll("li");
   const itemsArray = [];
   nodeList.forEach(node => itemsArray.push(node));
-  // console.log(nodeList)
+
+  // better
+  // const items = Array.from(document.querySelectorAll("[data-time]"));
 
   // Filter for only the elements that contain the word 'Flexbox'
 
-  const flexboxItems = itemsArray.filter(item => item.innerText === "Flexbox Video")
-  // console.log(flexboxItems);
+  const totalSecs = itemsArray.filter(item => item.innerText === "Flexbox Video")
+  // alt item.innerText.includes('Flexbox');
 
   // map down to a list of time strings
 
+  .map(item => item.dataset.time)
 
-  const timeStrings = flexboxItems.map(item => item.dataset.time);
-  // console.log(timeStrings);
   // map to an array of seconds
-  const seconds = timeStrings.map(ts => {
+  .map(ts => {
     let splitTime = ts.split(":");
     let minInSecs = Number(splitTime[0]) * 60;
     let sec = Number(splitTime[1]);
     return minInSecs + sec;
-  });
-  // console.log(seconds);
+  })
 
   // reduce to get total
-  const totalSec = seconds.reduce((total, time) => total + time); 
-  
+  .reduce((total, time) => total + time); 
+  console.log(totalSecs);
+  const hrs = Math.floor(totalSecs / 3600);
+  const mins = Math.floor((totalSecs % 3600) / 60);
+  const secs = (totalSecs % 3600) % 60;
+  console.log(`${hrs}:${mins}:${secs}`);
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
 
+  const moreTotalSecs = itemsArray.reduce((total, time) => {
+    if (time.innerText === "Flexbox Video") {
+      let splitTime = time.dataset.time.split(":");
+      let mins = Number(splitTime[0]) * 60;
+      let secs = Number(splitTime[1]);
+      return total + mins + secs;
+    };
+  });
+
+  console.log(moreTotalSecs)
 </script>
 </body>
 </html>
