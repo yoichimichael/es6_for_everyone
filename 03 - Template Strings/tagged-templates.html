@@ -12,6 +12,7 @@
 <body>
 <script>
   function highlight(strings, ...values) {
+    // debugger;
     let str = '';
     strings.forEach((string, i) => {
       str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
