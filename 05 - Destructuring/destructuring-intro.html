@@ -32,8 +32,11 @@
 
   const { twitter: tweet, facebook: fb } = wes.links.social;
 
-  const settings = { width: 300, color: 'black' }  // height, fontSize
+  const settings = { width: 300, color: 'black' }  // no height, no fontSize
+
   const { width = 100, height = 100, color = 'blue', fontSize = 25} = settings;
+
+  const { w: width = 400, h: height = 500 } = { w: 800 };
 
 </script>
 </body>
